@@ -6,7 +6,11 @@
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
         Loaded="Window_Loaded"
+<<<<<<<<< Temporary merge branch 1
+        Title="FracCalc" Height="333" Width="800">
+=========
         Title="FracCalc" Height="333" Width="809.809">
+>>>>>>>>> Temporary merge branch 2
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -14,6 +18,19 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition/>
+<<<<<<<<< Temporary merge branch 1
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="15*"/>            
+            <RowDefinition Height="*"/>            
+            <RowDefinition Height="15*"/>            
+        </Grid.RowDefinitions>
+
+        <TextBox
+            x:Name="numerator1"
+            Grid.Column="0" Grid.Row="0"
+            Text="1"
+=========
             <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -29,10 +46,28 @@
             Grid.Column="0" Grid.Row="0"
             Grid.RowSpan="3"
             Text=" 1"
+>>>>>>>>> Temporary merge branch 2
             FontSize="70"
             VerticalContentAlignment="Center"
             HorizontalContentAlignment="Center"
             />
+<<<<<<<<< Temporary merge branch 1
+        <Label 
+            Grid.Column="0" Grid.Row="1"
+            Background="Black"
+            />
+        <TextBox
+            x:Name="denominator1"
+            Grid.Column="0" Grid.Row="2"
+            Text="2"
+            FontSize="70"
+            VerticalContentAlignment="Center"
+            HorizontalContentAlignment="Center"
+            />
+
+        <StackPanel
+            Grid.Column="1" Grid.Row="0"
+=========
 
         <TextBox 
             x:Name="numerator1"
@@ -57,12 +92,40 @@
 
         <StackPanel
             Grid.Column="2" Grid.Row="0"
+>>>>>>>>> Temporary merge branch 2
             Grid.RowSpan="3"
             Orientation="Vertical"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             >
             <RadioButton
+<<<<<<<<< Temporary merge branch 1
+                x:Name="rbPlus"
+                Content="+" 
+                FontSize="30"
+                VerticalContentAlignment="Center"/>
+            <RadioButton
+                x:Name="rbMinus"
+                Content="-"
+                FontSize="30"
+                VerticalContentAlignment="Center" />
+            <RadioButton
+                x:Name="rbMul"
+                Content="*" 
+                FontSize="30"
+                VerticalContentAlignment="Center"/>
+            <RadioButton
+                x:Name="rbDiv"
+                Content="/"
+                FontSize="30"
+                VerticalContentAlignment="Center" />
+        </StackPanel>
+
+        <TextBox
+            x:Name="numerator2"
+            Grid.Column="2" Grid.Row="0"
+            Text="1"
+=========
             VerticalContentAlignment="Center"
                 FontSize="30"
             x:Name="rbPlus"
@@ -89,10 +152,24 @@
             Grid.Column="3" Grid.Row="0"
             Grid.RowSpan="3"
             Text=" 1"
+>>>>>>>>> Temporary merge branch 2
             FontSize="70"
             VerticalContentAlignment="Center"
             HorizontalContentAlignment="Center"
             />
+<<<<<<<<< Temporary merge branch 1
+        <Label 
+            Grid.Column="2" Grid.Row="1"
+            Background="Black"
+            />
+        <TextBox
+            x:Name="denominator2"
+            Grid.Column="2" Grid.Row="2"
+            Text="2"
+            FontSize="70"
+            VerticalContentAlignment="Center"
+            HorizontalContentAlignment="Center"
+=========
 
         <TextBox 
             x:Name="numerator2"
@@ -127,14 +204,42 @@
             />
 
         <Label
+            x:Name="numeratorRes"
+            Grid.Column="4" Grid.Row="0"
+            Content="1"
+=========
+            Grid.Column="5" Grid.Row="0"
+            Grid.RowSpan="3"
+            Content="="
+            FontSize="50"
+            Margin="20,0,20,10 "
+            Height="100"
+            Click="Equal_Click"
+                        />
+
+        <Label
             x:Name="integerRes"
             Grid.Column="6" Grid.Row="0"
             Grid.RowSpan="3"
             Content=""
+>>>>>>>>> Temporary merge branch 2
             FontSize="70"
             VerticalContentAlignment="Center"
             HorizontalContentAlignment="Center"
             />
+<<<<<<<<< Temporary merge branch 1
+        <Label 
+            Grid.Column="4" Grid.Row="1"
+            Background="Black"
+            />
+        <Label
+            x:Name="denominatorRes"
+            Grid.Column="4" Grid.Row="2"
+            Content="2"
+            FontSize="70"
+            VerticalContentAlignment="Center"
+            HorizontalContentAlignment="Center"
+=========
 
         <Label 
             x:Name="numeratorRes"

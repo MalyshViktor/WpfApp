@@ -76,89 +76,37 @@ namespace WpfApp1
             }
             if (e.LeftButton == MouseButtonState.Pressed)
             {
-                if (mineLabel == null) return;
-                //определяем соседей
-                int x = mineLabel.X, y = mineLabel.Y;
-                if (mineLabel.IsMine)
-                {
-                    if (MessageBoxResult.Yes == MessageBox.Show(
-                        "Еще раз?", "Игра провалена",
+            if (mineLabel == null) return;
+            if (mineLabel.IsMine)
+            {
                         MessageBoxButton.YesNo))
-                    {
-                        MessageBox.Show("Это в платной версии");
-                        Restart();
-                        return;
-                    }
-                    else
-                    {
-                        this.Close();
-                    }
+                {
+                    return;
                 }
                 else
                 {
-                    mineLabel.Content = LabelState.Open;
+                    this.Close();
                 }
-                //Массив предполагаемых имен:
-                String[] names =
+            }
+                "label_" + (x-1) + "_" + (y), 
+                "label_" + (x-1) + "_" + (y+1), 
+                "label_" + (x+1) + "_" + (y-1), 
+            int mines = 0;
+            {
+                MineLabel label = this.FindName(name) as MineLabel;
                 {
-                "label_" + (x-1) + "_" + (y),
-                "label_" + (x-1) + "_" + (y+1),
-                "label_" + (x) + "_" + (y+1),
-                "label_" + (x+1) + "_" + (y+1),
-                "label_" + (x+1) + "_" + (y),
-                "label_" + (x+1) + "_" + (y-1),
-                "label_" + (x) + "_" + (y-1),
-                "label_" + (x-1) + "_" + (y-1),
-
-                };
-                int mines = 0;
-
-                foreach (String name in names)
-                {
-                    //Ищем по имени (ссылку на label):
-                    MineLabel label = this.FindName(name) as MineLabel;
-                    if (label != null)
                     {
-                        //Проверяем мина ли это
-                        if (label.IsMine)
-                        {
-                            //Увеличиваем счетчик
-                            mines++;
-                            switch (mines)
-                            {
-                                case 1:
-                                    mineLabel.Foreground = Brushes.Blue;
-                                    break;
-                                case 2:
-                                    mineLabel.Foreground = Brushes.Green;
-                                    break;
-                                case 3:
-                                    mineLabel.Foreground = Brushes.Red;
-                                    break;
-                                case 4:
-                                    mineLabel.Foreground = Brushes.DarkBlue;
-                                    break;
-                                case 5:
-                                    mineLabel.Foreground = Brushes.Orange;
-                                    break;
-                                case 6:
-                                    mineLabel.Foreground = Brushes.DarkViolet;
-                                    break;
-                                case 7:
-                                    mineLabel.Foreground = Brushes.DarkKhaki;
-                                    break;
-                                case 8:
-                                    mineLabel.Foreground = Brushes.LightSeaGreen;
-                                    break;
-                            }
-                        }
                     }
                 }
+            }
 
-                mineLabel.Content = mines.ToString();
+            mineLabel.Content = mines.ToString();
             }
 
 
+            // mineLabel.Foreground = Brush. mines;
+            // MessageBox.Show("Click " + mineLabel.X + " " + mineLabel.Y);
+        }
 
             //MessageBox.Show("Click" + mineLabel.X + " " + mineLabel.Y);
         }
