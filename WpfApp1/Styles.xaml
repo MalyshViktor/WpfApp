@@ -13,6 +13,22 @@
              определенного типа (TargetType)
         -->
         <Style TargetType="Label">
+            <Style.Triggers>
+                <Trigger
+                    Property="IsMouseOver"
+                    Value="True">
+                    <Setter
+                        Property="FontSize"
+                        Value="50"/>
+                </Trigger>
+
+                <DataTrigger Binding="{Binding ElementName=check1, Path=IsChecked}"
+                             Value="True">
+                    <Setter Property="Foreground" Value="Orange"/>
+                </DataTrigger>
+                
+            </Style.Triggers>
+            <Style.Setters>
             <!-- Вместо FontSize=30
                  используется Setter -->
             <Setter 
@@ -26,10 +42,51 @@
             <Setter 
                 Property="FontFamily"
                 Value="Comic Sans MS"/>
+            </Style.Setters>
         </Style>
        
         <Style TargetType="{x:Type Button}">
-            <Setter Property="FontSize">
+            
+            <Style.Setters>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border BorderThickness="2"
+                                    BorderBrush="DarkGray" CornerRadius="5"
+                                    Background="{TemplateBinding Background}">
+                                <ContentPresenter
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Name="content"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background">
+                                        <Setter.Value>
+                                            <LinearGradientBrush
+                                              StartPoint="0 0"
+                                             EndPoint="1 1">
+                                                <GradientStop 
+                                                Offset="0.2"
+                                                Color="CadetBlue" />
+                                                <GradientStop 
+                                                 Offset="0.5"
+                                                 Color="LightCoral" />
+                                                <GradientStop 
+                                                 Offset="1"
+                                                 Color="Aqua" />
+                                            </LinearGradientBrush>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter Property="Background" Value="Green"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="FontSize">
                 <!-- для сложный значений 
                 Value выносится в отдельную
                 секцию -->
@@ -54,13 +111,39 @@
                     </LinearGradientBrush>
                 </Setter.Value>
             </Setter>
+            </Style.Setters>
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="Click">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation
+                                    Storyboard.TargetProperty="Height"
+                                    Duration="0:0:0.5"
+                                    From="50" To="100"/>
+                                <DoubleAnimation
+                                    Storyboard.TargetProperty="Width"
+                                    Duration="0:0:0.5"
+                                    From="50" To="196"/>
+                                <DoubleAnimation
+                                    Storyboard.TargetProperty="Opacity"
+                                    Duration="0:0:0.5"
+                                    From="0.5" To="1"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+
+                </EventTrigger>
+            </Style.Triggers>
         </Style>
         
         <!-- Именованные ресурсы -->
         <Style x:Key="CenteredContent">
-            <Setter 
+           
+             <Setter 
                 Property="Control.VerticalContentAlignment"
                 Value="Center" />
+            
             <Setter 
                 Property="Control.HorizontalContentAlignment"
                 Value="Center" />
@@ -108,5 +191,20 @@
         <Label>Label 7</Label>
         <Label>Label 8</Label>
 
+        <CheckBox x:Name="check1">Отметить</CheckBox>
+        
     </UniformGrid>
 </Window>
+    
+    <!--
+        Триггеры 
+    В общем: триггеры - это переключатели
+    В технике - системы с несколькими устойчивыми состояниями
+    В программировании: 
+     - дейстия, выполняемые при совпадении определенных условий
+    trigger event  - обработать событие
+    
+    в WPF разделяют стилевые триггеры и триггеры данных
+    Стилевые - применяют стили при заданных условиях
+    Триггеры данных - отслеживают изменения в данных и реагируют на них
+        -->
