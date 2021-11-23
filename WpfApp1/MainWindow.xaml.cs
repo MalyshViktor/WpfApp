@@ -30,75 +30,63 @@ namespace WpfApp1
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            // Read file
-            /* Операции ввода/вывода, в случае неудачи,
-             * выбрасывают исключения (throw exception)
-             * Если исключение не ловится (catch), то
-             * оно разрушает программу (ОС получает
-             * "недопустимую операцию"). Для того чтобы
-             * обработать исключения, потенциально опасные
-             * операциии (в рез-те которых возможен выброс
-             * исключения) берут в блок try-catch
-             */
+        {/*Read File
+         Операции вода/вывода, в случае неудачи,
+         выбрасывает исключения(throw exception)
+         Если исключние не отлавливается (catch), то оно 
+         разрушает программу(ОС получает недопустимую операцию)
+         для того чтобы обработать исключения, потенциально опасные операции
+         (в результате которых возможен выброс исключения) берут в блок try-catch
+         */
             String txt = "";
             try
-            {  // блок с кодом, в котором возможны исключения
-                using (var reader =
-                     new StreamReader("dataE.txt"))
+            {
+                using (var reader = new StreamReader("data.txt"))
                 {
                     txt = reader.ReadToEnd();
                 }
             }
             catch (IOException ex)
-            {   // блок выполняется, если будет исключение
+            {//блок выполняется, если будет исключение
                 MessageBox.Show(ex.Message);
                 txt = "* * *";
-                return;
-            }   // блоков catch может быть несколько для разных типов исключений
+            }//блоков catch может быть несколько для разных типов исключений
             catch (NullReferenceException ex)
             {
                 MessageBox.Show(ex.Message);
-                txt = "* * * *";
+                txt = "* * * * ";
             }
             finally
-            {  // блок выполнится в любом случае (даже если есть return)
+            {//блок выполнится в любом случае(даже если есть return)
                 text1.Text = txt;
             }
-
         }
-        private void Button_Click2(object sender, RoutedEventArgs e)
-        {
-            // Write file
-            /* Файлы (открытие файлов) относятся к
-               к неуправляемым ресурсам. Платформа
-               не закрывает файлы автоматически.
-               Наша программа должна позаботиться о
-               закрытии файлов.
-               Для обобщения работы с неупр. ресурсами
-               существует блок using(){}
-               То, что создается в этом блоке, разрушается
-               (вызывается метод Dispose() ) после окончания
-               блока
-             */
-            using (var writer =
-                new StreamWriter("data.txt"))
+        private void Button_Click1(object sender, RoutedEventArgs e)
+        {//Write file
+         //Файлы(открытие файлов) относятся к неуправляемым ресурсам
+         //Платформа не закрывает файлы автоматически/Наша программа должна позаботиться о закрытии файлов.
+         //для обобщения работ с неупр. ресурсами существует блок using(){}
+         //То, что создается в это блоке, разрушается(вызывается метод Dispose()) после окончания блока
+
+            using (StreamWriter writer = new StreamWriter("data.txt", true))
             {
-                writer.Write(text1.Text);
+                writer.WriteLine(text1.Text);
             }
         }
+        private void Button_Click2(object sender, RoutedEventArgs e)
+        {//Click
+            text1.Text += "* ";
+        }
+
+
+
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            text1.Text += " *";
-        }
 
-        /**
-         * Добавить
-         */
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-            #region создать объект с данными из полей ввода
+
+            #region
+            //Создать обьект с данными из полей ввода
             Product product = null;
             try
             {
@@ -107,74 +95,62 @@ namespace WpfApp1
                     SN = Convert.ToInt32(SN.Text),
                     Name = Name.Text,
                     Price = Convert.ToDecimal(Price.Text),
-                    Discount = Convert.ToDecimal(Discount.Text)
+                    Discount = Convert.ToDecimal(Discount.Text),
+
                 };
             }
             catch (FormatException ex)
             {
-                MessageBox.Show("Неправильное число");
+                MessageBox.Show("Неправильное число!");
             }
             catch (OverflowException ex)
             {
                 MessageBox.Show("Слишком большое число");
             }
             if (product == null) return;
-            #endregion
 
-            // добавляем объект в коллекцию
+            #endregion
             products.Add(product);
-            // выводим в текстовое поле
-            text1.Text += "\n" + product.Name + " " + product.Price;
-
+            text1.Text += "\n" + product.Name + " " + product.Price + "-" + product.Discount + "%";
         }
 
-        /**
-         * Сохранить
-         */
-        private void Button_Click_3(object sender, RoutedEventArgs e)
+        private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            #region сериализуем коллекцию
-            // using System.Xml.Serialization;
 
-            // Создаем сериализатор. Ему нужет тип, с которым работает
-            XmlSerializer serializer =
-                new XmlSerializer(products.GetType());
 
-            // создаем файл, в который будем сохранять результаты сериализации
-            using(var writer = new StreamWriter("products.xml"))
+            //using System.Xml.Serialization;
+            //Создаем сериализацию, Емиу нужен тип, с которым работает
+            XmlSerializer serializer = new XmlSerializer(products.GetType());
+            //создаем файл, в который будем сохранять результаты сериализации
+            using (var writer = new StreamWriter("products.xml"))
             {
-                // сериализуем объект product
+                //сериализуем обьект
                 serializer.Serialize(writer, products);
-                MessageBox.Show("Сохранено");
+                MessageBox.Show("Сохранено!");
             }
-            #endregion
-        }
 
-        /**
+        }
+        /*
          * Считать
-         */
-        private void Button_Click_4(object sender, RoutedEventArgs e)
+         * */
+        private void Button_Click_3(object sender, RoutedEventArgs e)
         {
             try
             {
-                using (var reader = new FileStream("products.xml", FileMode.Open))
+                using (StreamReader reader = new StreamReader("products.xml"))
                 {
-                    XmlSerializer serializer = new XmlSerializer(
-                        typeof(List<Product>)
-                    );
-                    products = (List<Product>)
-                        serializer.Deserialize(reader);
+                    XmlSerializer serializer = new XmlSerializer(typeof(List<Product>));
+                    products = (List<Product>)serializer.Deserialize(reader);
                 }
                 ShowProducts();
             }
             catch
             {
-                MessageBox.Show("Ошибка чтения файла");
+                MessageBox.Show("Ошибка чтения файла!");
             }
         }
 
-        private void ShowProducts( 
-            ProductComparers sorter = ProductComparers.BySN )
+        private void ShowProducts(ProductComparers sorter = ProductComparers.BySN)
         {
             switch (sorter)
             {
@@ -192,39 +168,65 @@ namespace WpfApp1
                 case ProductComparers.ByDiscountDesc:
                     break;
             }
-
+            //products.Sort(new Product.PriceComparer());
             text1.Text = "";
-            foreach(Product p in products)
+            foreach (Product p in products)
             {
                 text1.Text += p + "\n";
             }
+        }
+
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            ShowProducts(ProductComparers.BySN);
+        }
+
+        private void Button_Click_5(object sender, RoutedEventArgs e)
+        {
+            ShowProducts(ProductComparers.ByName);
+        }
+
+        private void Button_Click_6(object sender, RoutedEventArgs e)
+        {
+            ShowProducts(ProductComparers.ByPrice);
+        }
+
+        private void Button_Click_7(object sender, RoutedEventArgs e)
+        {
+            ShowProducts(ProductComparers.ByDiscountAsc);
+        }
+
+        private void Button_Click_8(object sender, RoutedEventArgs e)
+        {
+            ShowProducts(ProductComparers.ByDiscountDesc);
         }
     }
 
     public class Product : IComparable<Product>
     {
-        public Int32 SN { get; set; }
+        public int SN { get; set; }
         public String Name { get; set; }
         public decimal Price { get; set; }
         public decimal Discount { get; set; }
 
         public int CompareTo(Product other)
         {
-            // return SN.CompareTo(other.SN);
-            if (SN < other.SN) return -1;
-            if (SN > other.SN) return 1;
+            return Name.CompareTo(other.Name);
+            //if (Price < other.Price) return -1;
+            //if (Price > other.Price) return 1;
             return 0;
         }
 
         public override string ToString()
         {
-            return String.Format("{0, -7} {1, -10} {2} (-{3}%)", SN, Name, Price, Discount);
+            return String.Format("{0, -7} {1, -10} {2, -10} (-{3}%)", SN, Name, Price, Discount);
         }
 
         public class PriceComparer : IComparer<Product>
         {
             public int Compare(Product x, Product y)
             {
+                //return x.Price.CompareTo(y.Price);
                 return x.Price.CompareTo(y.Price);
             }
         }
@@ -232,7 +234,24 @@ namespace WpfApp1
         {
             public int Compare(Product x, Product y)
             {
+                //return x.Price.CompareTo(y.Price);
                 return x.Name.CompareTo(y.Name);
+            }
+        }
+        public class SNComparer : IComparer<Product>
+        {
+            public int Compare(Product x, Product y)
+            {
+                //return x.Price.CompareTo(y.Price);
+                return x.SN.CompareTo(y.SN);
+            }
+        }
+        public class DiscountComparer : IComparer<Product>
+        {
+            public int Compare(Product x, Product y)
+            {
+                //return x.Price.CompareTo(y.Price);
+                return x.Discount.CompareTo(y.Discount);
             }
         }
     }

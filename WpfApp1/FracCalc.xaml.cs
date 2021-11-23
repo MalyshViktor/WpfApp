@@ -150,7 +150,7 @@ namespace WpfApp1
                 res.Numerator -= res.Denominator;
                 res.Integer++;
             }
-
+            
             if (res == null)
             {
                 //Не выбрана операция
@@ -173,13 +173,13 @@ namespace WpfApp1
             }
             else
             {
-                numeratorRes.Content = res.Numerator.ToString();
+            numeratorRes.Content = res.Numerator.ToString();
                 denomeratorRes.Content = res.Denominator.ToString();
                 integerRes.Content = res.Integer.ToString();
-            }
-
         }
 
+        }
+       
     }
 
     public class Fraction

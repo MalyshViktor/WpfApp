@@ -106,7 +106,7 @@ namespace WpfApp1
              *   [1,2,3] - 1 или 2 или 3 или запятая (! аккуратно!)
              *   [0-9] диапазон
              *   [a-z] [a-zA-z] [0-9a-f] [а-пюя]
-             *   
+             * 
              *   [^123] - любой символ, кроме 1,2,3
              * */
 
@@ -132,7 +132,11 @@ namespace WpfApp1
             {
                 result2.Text = "No";
             }
+        }
 
+        private void Shuffle_Click(object sender, RoutedEventArgs e)
+        {
+            labelResult.Text = shuffler(textBlock.Text);
         }
     }
 }

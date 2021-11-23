@@ -27,6 +27,7 @@
                     FontSize=" 35"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"/>
+                
                 <TextBlock
                     FontSize="35"
                     VerticalAlignment="Center"
@@ -56,9 +57,9 @@
                     <TextBlock x:Name = "MouseY"
                      MouseWheel ="Window_MouseWheel"/>
                 </StackPanel>
-
+                
                 <Canvas x:Name= "canvas"
-                    Width="750"
+                        Width="750"
                     Height="350"
                      />
             </StackPanel>
