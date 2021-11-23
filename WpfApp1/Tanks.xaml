@@ -13,14 +13,14 @@
         x:Name="Field"
         Background="OliveDrab">
         <Image 
-            Source="tank.png"
             x:Name="TankImage"
+            Source="tank.png"
             Width="100"
             Height="100"
             Canvas.Left="340"
             Canvas.Top="170"
             />
-        <Ellipse
+        <Ellipse 
             x:Name="Enemy"
             Width="100"
             Height="100"

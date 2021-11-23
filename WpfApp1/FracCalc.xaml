@@ -19,9 +19,9 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="15*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="15*"/>
+            <RowDefinition Height="15*"/>            
+            <RowDefinition Height="*"/>            
+            <RowDefinition Height="15*"/>            
         </Grid.RowDefinitions>
 
         <TextBox
@@ -41,7 +41,7 @@
             FontSize="70"
             VerticalContentAlignment="Center"
             HorizontalContentAlignment="Center"/>
-        <Label
+        <Label 
             Grid.Column="1" Grid.Row="1"
             Background="Brown"
             />
@@ -50,9 +50,9 @@
             x:Name="denominator1"
         Grid.Column="1" Grid.Row="2"
         Text=" 2"
-        FontSize="70"
-        VerticalContentAlignment="Center"
-        HorizontalContentAlignment="Center"
+            FontSize="70"
+            VerticalContentAlignment="Center"
+            HorizontalContentAlignment="Center"
             />
 
         <StackPanel
@@ -64,22 +64,22 @@
             >
             <RadioButton
             VerticalContentAlignment="Center"
-            FontSize="30"
+                FontSize="30"
             x:Name="rbPlus"
             Content="+"/>
             <RadioButton
             VerticalContentAlignment="Center"
-            FontSize="30"
+                FontSize="30"
             x:Name="rbMinus"
             Content="-"/>
             <RadioButton
             VerticalContentAlignment="Center"
-            FontSize="30"
+                FontSize="30"
             x:Name="rbMul"
             Content="*"/>
             <RadioButton
             VerticalContentAlignment="Center"
-            FontSize="30"
+                FontSize="30"
             x:Name="rbDiv"
             Content="/"/>
         </StackPanel>
@@ -101,7 +101,7 @@
             FontSize="70"
             VerticalContentAlignment="Center"
             HorizontalContentAlignment="Center"/>
-        <Label
+        <Label 
             Grid.Column="4" Grid.Row="1"
             Background="Brown"
             />
@@ -110,9 +110,9 @@
             x:Name="denominator2"
         Grid.Column="4" Grid.Row="2"
         Text=" 2"
-        FontSize="70"
-        VerticalContentAlignment="Center"
-        HorizontalContentAlignment="Center"
+            FontSize="70"
+            VerticalContentAlignment="Center"
+            HorizontalContentAlignment="Center"
             />
 
         <Button
@@ -121,10 +121,10 @@
             Grid.RowSpan="3"
             Content="="
             FontSize="50"
-            Margin="20,0,20,10 "
             Height="100"
+            Margin="20,0,20,10"
             Click="Equal_Click"
-                        />
+            />
 
         <Label
             x:Name="integerRes"
@@ -143,7 +143,7 @@
             FontSize="70"
             VerticalContentAlignment="Center"
             HorizontalContentAlignment="Center"/>
-        <Label
+        <Label 
             Grid.Column="7" Grid.Row="1"
             Background="Brown"
             />
@@ -152,9 +152,9 @@
         x:Name="denomeratorRes"
         Grid.Column="7" Grid.Row="2"
         Content=""
-        FontSize="70"
-        VerticalContentAlignment="Center"
-        HorizontalContentAlignment="Center"
+            FontSize="70"
+            VerticalContentAlignment="Center"
+            HorizontalContentAlignment="Center"
             />
     </Grid>
 </Window>

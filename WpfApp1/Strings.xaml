@@ -16,7 +16,7 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <!-- Row 1 -->
+    <!-- Row 1 -->    
         <TextBlock
             x:Name="textBlock"
             Text=" Съешь еще этих мягких французских булочегг"
@@ -29,9 +29,9 @@
             Content="Transform"
                 Click="Button_Click"/>
             <Button
-            x:Name="Shuffle"
+                x:Name="Shuffle"
             Margin=" 10"
-            Content="Shuffle"
+                Content="Shuffle"
             Click ="Shuffle_Click"/>
         </StackPanel>
 
@@ -41,15 +41,15 @@
             FontSize="30"
             TextWrapping="Wrap"
             />
-        <!-- Row 2 -->
-        <TextBox
+    <!-- Row 2 -->
+        <TextBox 
             Grid.Row="1" Grid.Column="0"
             x:Name="textBlock2"
             Text=" Valera0505552233"
             FontSize="30"
             TextWrapping="Wrap"
             VerticalAlignment="Center"/>
-        <StackPanel
+        <StackPanel 
             Orientation="Vertical"
             Grid.Row="1" Grid.Column="1">
             <Button
@@ -67,7 +67,7 @@
             x:Name="result2"
             Grid.Row="1" Grid.Column="2"
             FontSize="30"
-            TextWrapping="Wrap"
+            TextWrapping="Wrap" 
             VerticalAlignment="Center"/>
 
 

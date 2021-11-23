@@ -25,6 +25,7 @@ namespace WpfApp1
         {
             InitializeComponent();
             random = new Random();
+            // SystemSounds.Exclamation.Play();
             for (int y = 0; y < App.SizeY; y++)
             {
                 for (int x = 0; x < App.SizeX; x++)
@@ -34,18 +35,14 @@ namespace WpfApp1
                     {
                         X = x,
                         Y = y,
-                        //IsMine = isMine,
-                        //Content = isMine ? "\x2622" : "\x224b",
-                        FontSize = 20,
                         VerticalContentAlignment = VerticalAlignment.Center,
                         HorizontalContentAlignment = HorizontalAlignment.Center
                     };
                     mineLabel.MouseDown += MineLabel_MouseDown;
-                    this.RegisterName("label_" + x + "_" + y, mineLabel);
                     Field.Children.Add(mineLabel);
 
                 }
-            }
+        }
             Restart();
         }
 
