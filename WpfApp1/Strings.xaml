@@ -1,0 +1,75 @@
+﻿<Window x:Class="WpfApp1.Strings"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        Title="Strings" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <!-- Row 1 -->
+        <TextBlock
+            x:Name="textBlock"
+            Text=" Съешь еще этих мягких французских булочегг"
+            FontSize="30"
+            TextWrapping="Wrap"
+            />
+        <StackPanel Grid.Column="1">
+            <Button
+            Margin=" 10"
+            Content="Transform"
+                Click="Button_Click"/>
+            <Button
+            x:Name="Shuffle"
+            Margin=" 10"
+            Content="Shuffle"
+            Click ="Shuffle_Click"/>
+        </StackPanel>
+
+        <TextBlock
+            x:Name="LabelResult"
+              Grid.Column ="2"
+            FontSize="30"
+            TextWrapping="Wrap"
+            />
+        <!-- Row 2 -->
+        <TextBox
+            Grid.Row="1" Grid.Column="0"
+            x:Name="textBlock2"
+            Text=" Valera0505552233"
+            FontSize="30"
+            TextWrapping="Wrap"
+            VerticalAlignment="Center"/>
+        <StackPanel
+            Orientation="Vertical"
+            Grid.Row="1" Grid.Column="1">
+            <Button
+                x:Name ="rdigits"
+                Content="Digits"
+                FontSize="30"
+                Click ="Rdigits_Click" />
+            <Button
+                x:Name ="email"
+                Content="Email"
+                FontSize="30"
+                Click ="Email_Click" />
+        </StackPanel>
+        <TextBlock
+            x:Name="result2"
+            Grid.Row="1" Grid.Column="2"
+            FontSize="30"
+            TextWrapping="Wrap"
+            VerticalAlignment="Center"/>
+
+
+    </Grid>
+</Window>

@@ -1,0 +1,160 @@
+﻿<Window x:Class="WpfApp1.FracCalc"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        Loaded="Window_Loaded"
+        Title="FracCalc" Height="333" Width="809.809">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="15*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="15*"/>
+        </Grid.RowDefinitions>
+
+        <TextBox
+            x:Name="integer1"
+            Grid.Column="0" Grid.Row="0"
+            Grid.RowSpan="3"
+            Text=" 1"
+            FontSize="70"
+            VerticalContentAlignment="Center"
+            HorizontalContentAlignment="Center"
+            />
+
+        <TextBox 
+            x:Name="numerator1"
+            Grid.Column="1" Grid.Row="0"
+            Text=" 1"
+            FontSize="70"
+            VerticalContentAlignment="Center"
+            HorizontalContentAlignment="Center"/>
+        <Label
+            Grid.Column="1" Grid.Row="1"
+            Background="Brown"
+            />
+
+        <TextBox
+            x:Name="denominator1"
+        Grid.Column="1" Grid.Row="2"
+        Text=" 2"
+        FontSize="70"
+        VerticalContentAlignment="Center"
+        HorizontalContentAlignment="Center"
+            />
+
+        <StackPanel
+            Grid.Column="2" Grid.Row="0"
+            Grid.RowSpan="3"
+            Orientation="Vertical"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            >
+            <RadioButton
+            VerticalContentAlignment="Center"
+            FontSize="30"
+            x:Name="rbPlus"
+            Content="+"/>
+            <RadioButton
+            VerticalContentAlignment="Center"
+            FontSize="30"
+            x:Name="rbMinus"
+            Content="-"/>
+            <RadioButton
+            VerticalContentAlignment="Center"
+            FontSize="30"
+            x:Name="rbMul"
+            Content="*"/>
+            <RadioButton
+            VerticalContentAlignment="Center"
+            FontSize="30"
+            x:Name="rbDiv"
+            Content="/"/>
+        </StackPanel>
+
+        <TextBox
+            x:Name="integer2"
+            Grid.Column="3" Grid.Row="0"
+            Grid.RowSpan="3"
+            Text=" 1"
+            FontSize="70"
+            VerticalContentAlignment="Center"
+            HorizontalContentAlignment="Center"
+            />
+
+        <TextBox 
+            x:Name="numerator2"
+            Grid.Column="4" Grid.Row="0"
+            Text=" 1"
+            FontSize="70"
+            VerticalContentAlignment="Center"
+            HorizontalContentAlignment="Center"/>
+        <Label
+            Grid.Column="4" Grid.Row="1"
+            Background="Brown"
+            />
+
+        <TextBox
+            x:Name="denominator2"
+        Grid.Column="4" Grid.Row="2"
+        Text=" 2"
+        FontSize="70"
+        VerticalContentAlignment="Center"
+        HorizontalContentAlignment="Center"
+            />
+
+        <Button
+            x:Name="Equal"
+            Grid.Column="5" Grid.Row="0"
+            Grid.RowSpan="3"
+            Content="="
+            FontSize="50"
+            Margin="20,0,20,10 "
+            Height="100"
+            Click="Equal_Click"
+                        />
+
+        <Label
+            x:Name="integerRes"
+            Grid.Column="6" Grid.Row="0"
+            Grid.RowSpan="3"
+            Content=""
+            FontSize="70"
+            VerticalContentAlignment="Center"
+            HorizontalContentAlignment="Center"
+            />
+
+        <Label 
+            x:Name="numeratorRes"
+            Grid.Column="7" Grid.Row="0"
+            Content=""
+            FontSize="70"
+            VerticalContentAlignment="Center"
+            HorizontalContentAlignment="Center"/>
+        <Label
+            Grid.Column="7" Grid.Row="1"
+            Background="Brown"
+            />
+
+        <Label
+        x:Name="denomeratorRes"
+        Grid.Column="7" Grid.Row="2"
+        Content=""
+        FontSize="70"
+        VerticalContentAlignment="Center"
+        HorizontalContentAlignment="Center"
+            />
+    </Grid>
+</Window>
