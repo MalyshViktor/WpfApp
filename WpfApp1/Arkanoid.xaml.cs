@@ -22,6 +22,7 @@ namespace WpfApp1
     /// </summary>
     public partial class Arkanoid : Window
     {
+        private Random random;
         DispatcherTimer Timer;
         private HoldKey holdkey;
         private List<Rectangle> Bricks;
@@ -29,6 +30,7 @@ namespace WpfApp1
         public Arkanoid()
         {
             InitializeComponent();
+            random = new Random();
             Timer = new DispatcherTimer
             {
                 Interval = TimeSpan.FromMilliseconds(20)
@@ -56,7 +58,8 @@ namespace WpfApp1
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            List<Ellipse> toRemove = new List<Ellipse>();
+            Canvas.SetLeft(Ship, Canvas.GetLeft(Ship));
+            List <Ellipse> toRemove = new List<Ellipse>();
             foreach (var Ball in Balls)
             {
                 #region Движение шарика                             
@@ -111,6 +114,7 @@ namespace WpfApp1
                 Balls.Remove(rem);
                 Field.Children.Remove(rem);
             }
+
             if (Balls.Count == 0)
             {
                 Timer.Stop();
@@ -137,6 +141,7 @@ namespace WpfApp1
                     double brickX = Canvas.GetLeft(Brick);
                     double brickY = Canvas.GetTop(Brick);
                     //сверху
+
                     if (ballY + Ball.Height >= brickY
                         && ballY + Ball.Height <= brickY + Math.Abs(2 * data.Vy)
                           && ballX >= brickX - Ball.Width / 2//левый край
@@ -205,8 +210,8 @@ namespace WpfApp1
                             toDuplicate.Add(Ball);
                     }
 
-
                 }
+
             }
             foreach (var rem in toRemove)
             {
@@ -215,6 +220,7 @@ namespace WpfApp1
             }
             foreach (var dup in toDuplicate)
             {
+
                 Ellipse newBall = new Ellipse
                 {
                     Width = dup.Width,
@@ -232,14 +238,76 @@ namespace WpfApp1
                 Canvas.SetLeft(newBall, Canvas.GetLeft(dup));
                 Canvas.SetTop(newBall, Canvas.GetTop(dup));
             }
+            if (Bricks.Count == 0)
+            {
+                if (MessageBoxResult.Yes == MessageBox.Show(
+                        "Продолжить?", "Победа!",
+                        MessageBoxButton.YesNo))
+                {
+                    foreach (var ball in Balls)
+                    {
+                        if (Balls.Count > 0)
+                        {
+                            Field.Children.Remove(ball);
+                        }
+                    }
+                    Field.Children.Remove(Ball1);
+                    Balls.Clear();
+                    restart();
+                    return;
+                }
+                else
+                {
+                    this.Close();
+                }
+            }
+
+        }
+
+        private void restart()
+        {
+            Canvas.SetLeft(Ship, 390);
+            
+            Ellipse newBall = new Ellipse
+            {
+                Width = 30,
+                Height = 30,
+                Fill = new SolidColorBrush(
+                Color.FromRgb(150, 150, 250)),
+                Tag = new BallData
+                {
+                    Vx = 5,
+                    Vy = -5
+                }
+            };
+            holdkey = HoldKey.None;
+
+            Balls.Add(newBall);
+            Field.Children.Add(newBall);
+            Canvas.SetLeft(newBall, 340);
+            Canvas.SetTop(newBall, 200);
+            for (int i = 0; i < random.Next(6, 8); i++)
+            {
+                Rectangle rectangle = new Rectangle
+                {
+                    Width = 70,
+                    Height = 20,
+                    Fill = Brushes.DarkGoldenrod
+                };
+                Field.Children.Add(rectangle);
+                Canvas.SetLeft(rectangle, random.Next(40, 60) + 90 * i);
+                Canvas.SetTop(rectangle, random.Next(20, 40));
+                Bricks.Add(rectangle);
+            }
+            Timer.Start();
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             //Продолжение конструктора - работа с элементами интерфейс
             Ball1.Tag = (object)new BallData
             {
-                Vx = -5,
-                Vy = 5
+                Vx = 5,
+                Vy = -3
 
             };
             Balls.Add(Ball1);
