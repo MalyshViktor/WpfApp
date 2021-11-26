@@ -119,5 +119,14 @@
             Background="YellowGreen"
             Click="Styles_Click"
             />
+
+        <Button 
+            Grid.Column="2" Grid.Row="2"
+            x:Name="DnD"
+            Content="Drag n'Drop"
+            FontSize="25"
+            Background="YellowGreen"
+            Click="DnD_Click"
+            />
     </Grid>
 </Window>
