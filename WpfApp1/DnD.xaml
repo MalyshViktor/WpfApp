@@ -14,17 +14,43 @@
             x:Name="Subj"
             Fill="DarkSalmon"
             Width="100"
-            Height="150"
+            Height="50"
             Canvas.Left="100"
             Canvas.Top="150"
-            
-            />
+         />
         <Rectangle
+            MouseDown="Subj_MouseDown"
             x:Name="Subj2"
+            Fill="LightCoral"
+            Width="100"
+            Height="50"
+            Canvas.Left="100"
+            Canvas.Top="75"
+          />
+        <Ellipse
+            MouseDown="Subj_MouseDown"
+            x:Name="Subj3"
+            Fill="LightSalmon"
+            Width="100"
+            Height="50"
+            Canvas.Left="100"
+            Canvas.Top="250"
+          />
+        <Rectangle
+            x:Name="Subj1"
             Stroke="SeaGreen"
             Width="200"
             Height="250"
             Canvas.Left="400"
-            Canvas.Top="150"/>
+            Canvas.Top="150"
+           />
+        <Ellipse
+            MouseDown="Ellipse_MouseDown"
+            Fill="Tomato"
+            Width="50"
+            Height="100"
+            Canvas.Left="224"
+            Canvas.Top="200"
+           />
     </Canvas>
 </Window>

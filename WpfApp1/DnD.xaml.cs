@@ -19,50 +19,98 @@ namespace WpfApp1
     /// </summary>
     public partial class DnD : Window
     {
-        private bool isDragged;
+        //private bool isDragged;
+        private Point initialPoint;
         private Point touchPoint;
+        private FrameworkElement draggedObject;
+        private FrameworkElement phantomObject;
         public DnD()
         {
             InitializeComponent();
-            isDragged = false;
+            //isDragged = false;
+            draggedObject = null;
+            phantomObject = null;
         }
         private void Mouse_Up(object sender, MouseButtonEventArgs e)
         {
-            switch (e.ChangedButton)
+            if (draggedObject != null)
             {
-                case MouseButton.Left:
-                    isDragged = false;
-                    Field.ReleaseMouseCapture();//освобождение мыши
-                    break;
+                switch (e.ChangedButton)
+                {
+                    case MouseButton.Left:
+                        if (Canvas.GetLeft(draggedObject) < 400)
+                        {//возвращаев в исходную позицию
+                            Canvas.SetLeft(draggedObject, initialPoint.X);
+                            Canvas.SetTop(draggedObject, initialPoint.Y);
+                        }
+
+                        //draggedObject = null;
+                        //if (touchPoint.X > Canvas.GetLeft(Subj1) || touchPoint.X >= Canvas.GetLeft(Subj1) + Subj1.Width)
+                        //{
+                        //    Canvas.SetLeft(draggedObject, Canvas.GetLeft(Subj1) + Subj1.Width / 2);
+                        //    Canvas.SetTop(draggedObject, Canvas.GetLeft(Subj1) + Subj1.Width / 2);
+                        //    Field.ReleaseMouseCapture();//освобождение мыши
+                        //}
+                        //else
+                        //{
+                        //    Field.ReleaseMouseCapture();
+                        //}
+                        draggedObject = null;
+                        Field.ReleaseMouseCapture();
+                        break;
+                }
             }
-        }
+            //**********PHANTOM********************//
+            if (phantomObject != null)
+            {
+                switch(e.ChangedButton)
+                {
+                    case MouseButton.Left:
+                        if (Canvas.GetLeft(phantomObject) < 400)
+                        {//возвращаев в исходную позицию
+                            Canvas.SetLeft(phantomObject, initialPoint.X);
+                            Canvas.SetTop(phantomObject, initialPoint.Y);
+                        }
+                        phantomObject = null;
+                        Field.ReleaseMouseCapture();
+                        break;
+                }
+
+                Field.Children.Remove(phantomObject);
+                //phantomObject = null;
+            }
+         }
         private void Mouse_Move(object sender, MouseEventArgs e)
         {
-            if (isDragged)
+            if (draggedObject != null)
             {
-                Canvas.SetLeft(Subj, e.GetPosition(Field).X - touchPoint.X);
-                Canvas.SetTop(Subj, e.GetPosition(Field).Y - touchPoint.Y);
-                if (Canvas.GetLeft(Subj) + Subj.Width / 2 >= Canvas.GetLeft(Subj2))
-                {
-                    Canvas.SetLeft(Subj, e.GetPosition(Subj2).X);
-                    Canvas.SetTop(Subj, e.GetPosition(Subj2).Y);
-                    
-                }
-                else
-                {
-                    Field.ReleaseMouseCapture();
-                }
+                Canvas.SetLeft(draggedObject, e.GetPosition(Field).X - touchPoint.X);
+                Canvas.SetTop(draggedObject, e.GetPosition(Field).Y - touchPoint.Y);
+
+            }
+            //Для фантомного объекта
+            if (phantomObject != null)
+            {
+                Canvas.SetLeft(phantomObject, e.GetPosition(Field).X - touchPoint.X);
+                Canvas.SetTop(phantomObject, e.GetPosition(Field).Y - touchPoint.Y);
+
             }
 
-        }
 
+
+        }
         private void Subj_MouseDown(object sender, MouseButtonEventArgs e)
         {
             switch (e.ChangedButton)
             {
                 case MouseButton.Left:
-                    isDragged = true;
-                    touchPoint = e.GetPosition(Subj);
+                    draggedObject = sender as FrameworkElement;
+                    if (draggedObject == null) return;
+
+                    touchPoint = e.GetPosition(draggedObject);
+                    initialPoint.X = Canvas.GetLeft(draggedObject);
+                    initialPoint.Y = Canvas.GetTop(draggedObject);
+
                     Field.CaptureMouse(); //захват - события
                     //мыши будут попадать в это окно, даже если указатель из него выйдет
                     break;
@@ -77,7 +125,22 @@ namespace WpfApp1
             }
         }
 
-
+        private void Ellipse_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            //Вариация с фантомным объектом
+            Ellipse proto = sender as Ellipse;
+            phantomObject = new Ellipse
+            {
+                Width = proto.Width,
+                Height = proto.Height,
+                Stroke = Brushes.Tomato,
+                //Fill = Brushes.Gray
+            };
+            Field.Children.Add(phantomObject);
+            Canvas.SetLeft(phantomObject, Canvas.GetLeft(proto));
+            Canvas.SetTop(phantomObject, Canvas.GetTop(proto));
+            touchPoint = e.GetPosition(proto);
+        }
     }
 }
 
