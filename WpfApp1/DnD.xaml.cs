@@ -38,12 +38,17 @@ namespace WpfApp1
                 switch (e.ChangedButton)
                 {
                     case MouseButton.Left:
-                        if (Canvas.GetLeft(draggedObject) < 400)
+                        if (Canvas.GetLeft(draggedObject) < Canvas.GetLeft(Subj1) || Canvas.GetLeft(draggedObject) > Canvas.GetLeft(Subj1) + Subj.Width ||
+                            Canvas.GetTop(draggedObject) < Canvas.GetTop(Subj1) || Canvas.GetTop(draggedObject) < Canvas.GetTop(Subj1) - Subj1.Height)
                         {//возвращаев в исходную позицию
                             Canvas.SetLeft(draggedObject, initialPoint.X);
                             Canvas.SetTop(draggedObject, initialPoint.Y);
                         }
-
+                        else 
+                        {
+                            Canvas.SetLeft(draggedObject, Canvas.GetLeft(Subj1) + Subj1.Width/2- Subj.Width/2);
+                            Canvas.SetTop(draggedObject, Canvas.GetTop(Subj1) + Subj1.Height/2 - Subj.Height/2);
+                        }
                         //draggedObject = null;
                         //if (touchPoint.X > Canvas.GetLeft(Subj1) || touchPoint.X >= Canvas.GetLeft(Subj1) + Subj1.Width)
                         //{
@@ -66,10 +71,16 @@ namespace WpfApp1
                 switch(e.ChangedButton)
                 {
                     case MouseButton.Left:
-                        if (Canvas.GetLeft(phantomObject) < 400)
+                        if (Canvas.GetLeft(phantomObject) < Canvas.GetLeft(Subj1) || Canvas.GetLeft(phantomObject) > Canvas.GetLeft(Subj1) + Subj.Width ||
+                            Canvas.GetTop(phantomObject) < Canvas.GetTop(Subj1) || Canvas.GetTop(phantomObject) < Canvas.GetTop(Subj1)-Subj1.Height)
                         {//возвращаев в исходную позицию
-                            Canvas.SetLeft(phantomObject, initialPoint.X);
-                            Canvas.SetTop(phantomObject, initialPoint.Y);
+                            Canvas.SetLeft(phantomObject, 224);
+                            Canvas.SetTop(phantomObject, 200);
+                        }
+                        else
+                        {
+                            Canvas.SetLeft(phantomObject, Canvas.GetLeft(Subj1) + Subj1.Width / 2 - Subj.Width / 2);
+                            Canvas.SetTop(phantomObject, Canvas.GetTop(Subj1) + Subj1.Height / 2 - Subj.Height / 2);
                         }
                         phantomObject = null;
                         Field.ReleaseMouseCapture();
