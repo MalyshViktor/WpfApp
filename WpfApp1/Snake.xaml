@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
         Loaded="Window_Loaded"
+        PreviewKeyDown="Window_PreviewKeyDown"
         Title="Snake" Height="450" Width="800">
     <Canvas x:Name="Field">
         
