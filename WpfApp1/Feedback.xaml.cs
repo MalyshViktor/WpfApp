@@ -23,5 +23,10 @@ namespace WpfApp1
         {
             InitializeComponent();
         }
+
+        private void send_Click(object sender, RoutedEventArgs e)
+        {
+            text.Text = " ";
+        }
     }
 }

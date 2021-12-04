@@ -214,7 +214,7 @@ namespace WpfApp1
             return Name.CompareTo(other.Name);
             //if (Price < other.Price) return -1;
             //if (Price > other.Price) return 1;
-            return 0;
+
         }
 
         public override string ToString()
