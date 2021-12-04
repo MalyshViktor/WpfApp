@@ -146,5 +146,13 @@
             </WrapPanel>
             </StackPanel>
         </Button>
+        <Button 
+            Grid.Column="1" Grid.Row="3"
+            x:Name="Feedback"
+            Content="Feedback"
+            FontSize="25"
+            Background="YellowGreen"
+            Click="Feedback_Click"
+            />
     </Grid>
 </Window>
