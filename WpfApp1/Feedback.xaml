@@ -21,12 +21,13 @@
                 </DataTrigger>
 
             </Style.Triggers>
+            
         </Style>
         <Style TargetType="{x:Type Button}">
             <Style.Setters>
                 <Setter Property="Template">
                     <Setter.Value>
-                        <ControlTemplate TargetType="Button">
+                        <ControlTemplate TargetType ="Button">
                             <Border 
                                 BorderThickness="3"
                                 BorderBrush="Orange"
