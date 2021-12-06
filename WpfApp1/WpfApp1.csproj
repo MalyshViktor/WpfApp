@@ -61,6 +61,12 @@
     <Compile Include="DnD.xaml.cs">
       <DependentUpon>DnD.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DT.xaml.cs">
+      <DependentUpon>DT.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Feedback.xaml.cs">
+      <DependentUpon>Feedback.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Minesweeper.xaml.cs">
       <DependentUpon>Minesweeper.xaml</DependentUpon>
     </Compile>
@@ -84,6 +90,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DnD.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DT.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Feedback.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

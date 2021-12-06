@@ -12,7 +12,7 @@
              применяемых ко всем элементам 
              определенного типа (TargetType)
         -->
-        <Style TargetType="Label">
+        <Style x:Name ="Gradient" TargetType="Label">
             <Style.Triggers>
                 <Trigger
                     Property="IsMouseOver"
@@ -165,6 +165,14 @@
             <Setter 
                 Property="Control.HorizontalContentAlignment"
                 Value="Center" />
+        </Style>
+        <Style  TargetType ="Label" x:Key="Mixed_Style" BasedOn="{StaticResource BigCentered}">
+
+        </Style>
+        <Style TargetType="Button" x:Key ="New" BasedOn="{StaticResource Mixed_Style}">
+            <Setter 
+                Property="Control.FontSize"
+                Value="60"/>
         </Style>
     </Window.Resources>
     

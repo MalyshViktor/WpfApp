@@ -98,7 +98,7 @@ namespace WpfApp1
             //    seg.Y = seg_1.Y;
             //    seg.X = seg_1.X;
             //}
-            int foodIndex = -1;
+            //int foodIndex = -1;
             //коррекция - еда "мигрирует" в хвост
             foodIndexes.Clear();
             for (int i = 1; i < Python.Count; i++)
@@ -126,71 +126,52 @@ namespace WpfApp1
                         }
                     };
                 }
-            for (int i = Python.Count - 1; i >= 1; i--)
-            {
-                //проходим все элементы, проверяем на еду
-                if (Python[i] as Food != null)
+                for (int i = Python.Count - 1; i >= 1; i--)
                 {
-                    foodIndex = i;
-                }
-            }
-            if (foodIndex != -1)
-            {
-                //foodInside
-                Segment food = Python[foodIndex];
-                if (foodIndex == Python.Count - 1)
-                {//еда в самом хвосте - меняем ее на сегмент
-                    Python[foodIndex] = new Segment()
+                    //проходим все элементы, проверяем на еду
+                    if (Python[i] as Food != null)
                     {
-                        X = food.X,
-                        Y = food.Y,
-                        Figure = new Ellipse
+                        foodIndex = i;
+                    }
+                }
+                if (foodIndex != -1)
+                {
+                    //foodInside
+                    Segment food = Python[foodIndex];
+                    if (foodIndex == Python.Count - 1)
+                    {//еда в самом хвосте - меняем ее на сегмент
+                        Python[foodIndex] = new Segment()
                         {
-                            Width = food.Figure.Width,
-                            Height = food.Figure.Height,
-                            Fill = (food.Figure as Rectangle).Fill
-                        }
-                    };
+                            X = food.X,
+                            Y = food.Y,
+                            Figure = new Ellipse
+                            {
+                                Width = food.Figure.Width,
+                                Height = food.Figure.Height,
+                                Fill = (food.Figure as Rectangle).Fill
+                            }
+                        };
+
+                    }
+                    else
+                    {//еда в середине - сдвигаем ее на 1 позицию
+                        Python.Remove(food);
+                        Python.Insert(foodIndex + 1, food);
+                    }
+                    //убираем еду с поля
+                    Field.Children.Remove(food.Figure);
 
                 }
-                else
-                {//еда в середине - сдвигаем ее на 1 позицию
-                    Python.Remove(food);
-                    Python.Insert(foodIndex + 1, food);
+
+                for (int i = Python.Count - 1; i >= 1; i--)
+                {
+
+                    Segment seg = Python[i];
+                    Segment seg_1 = Python[i - 1];
+                    seg.Y = seg_1.Y;
+                    seg.X = seg_1.X;
                 }
-                //убираем еду с поля
-                Field.Children.Remove(food.Figure);
-                
-            }
 
-            for (int i = Python.Count - 1; i >= 1; i--)
-            {
-
-                Segment seg = Python[i];
-                Segment seg_1 = Python[i - 1];
-                seg.Y = seg_1.Y;
-                seg.X = seg_1.X;
-            }
-
-            switch (moveDirection)
-            {
-                case MoveDirection.Left:
-                    Python[0].X -= 20;
-                    break;
-                case MoveDirection.Right:
-                    Python[0].X += 20;
-                    break;
-                case MoveDirection.Up:
-                    Python[0].Y -= 20;
-                    break;
-                case MoveDirection.Down:
-                    Python[0].Y += 20;
-                    break;
-            }
-   
-            if (Python[0].X == fruit.X && Python[0].Y == fruit.Y)
-            {
-                //делаем еще один шаг в этом же направлении
                 switch (moveDirection)
                 {
                     case MoveDirection.Left:
@@ -207,28 +188,48 @@ namespace WpfApp1
                         break;
                 }
 
-                //вставляем еду в змейку
-                Python.Insert(1, fruit); // 1 - индекс вставки
-                //генерируем новую еду
-                fruit = new Food();
-                //проверяем чтобы еда не попала на змею
-                bool collision = false;
-                do
+                if (Python[0].X == fruit.X && Python[0].Y == fruit.Y)
                 {
-                    fruit.X = random.Next(1, 40) * 20;
-                    foreach (Segment seg in Python)
+                    //делаем еще один шаг в этом же направлении
+                    switch (moveDirection)
                     {
-                        if (Math.Abs(seg.X - fruit.X) <= seg.Figure.Width && seg.Y -fruit.Y <= seg.Figure.Height)
-                        {
-                            collision = true;
-                        }
+                        case MoveDirection.Left:
+                            Python[0].X -= 20;
+                            break;
+                        case MoveDirection.Right:
+                            Python[0].X += 20;
+                            break;
+                        case MoveDirection.Up:
+                            Python[0].Y -= 20;
+                            break;
+                        case MoveDirection.Down:
+                            Python[0].Y += 20;
+                            break;
                     }
-                } while (collision);
-                //отображаем ее
-                fruit.Show(Field);
 
+                    //вставляем еду в змейку
+                    Python.Insert(1, fruit); // 1 - индекс вставки
+                                             //генерируем новую еду
+                    fruit = new Food();
+                    //проверяем чтобы еда не попала на змею
+                    bool collision = false;
+                    do
+                    {
+                        fruit.X = random.Next(1, 40) * 20;
+                        foreach (Segment seg in Python)
+                        {
+                            if (Math.Abs(seg.X - fruit.X) <= seg.Figure.Width && seg.Y - fruit.Y <= seg.Figure.Height)
+                            {
+                                collision = true;
+                            }
+                        }
+                    } while (collision);
+                    //отображаем ее
+                    fruit.Show(Field);
+
+                }
+                ShowPython();
             }
-            ShowPython();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -311,14 +312,17 @@ namespace WpfApp1
 
     }
 
-    /*
-        ***** 0
-         *****0
-          ****0*
-           ***0**
-           
 
-            0*****
-            ******
-*/
 }
+
+
+/*
+***** 0
+*****0
+****0*
+***0**
+
+
+0*****
+******
+    */
