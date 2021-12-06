@@ -40,7 +40,7 @@ namespace WpfApp1
                 new Label
                 {
                     Content = "Label Big",
-                    Style = FindResource("BigCentered") as Style
+                    Style = FindResource("Mixed_Style") as Style
                 }
             );
         }
