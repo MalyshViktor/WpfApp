@@ -30,7 +30,7 @@ namespace WpfApp1
         public Snake()
         {
             InitializeComponent();
-            timer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(100) };
+            timer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(200) };
             timer.Tick += TimerTick;
             Python = new List<Segment>();
             random = new Random();
@@ -204,19 +204,34 @@ namespace WpfApp1
                 fruit.Show(Field);
             }
             #endregion
+            //Проигрыш, если врезается в себя
 
-            #region Выход за поле
-            if (Python[0].X < 0 || Python[0].X >= Field.Width - Field.Width % head.Figure.Width || Python[0].Y <= Field.Height % head.Figure.Height || Python[0].Y >= Field.Height - Field.Height % head.Figure.Height)
+            for (int i = 1; i < Python.Count; i++)
             {
-                MessageBox.Show("Игра окончена!");
+                Segment seg = Python[i];
+                if (head.X == seg.X && head.Y == seg.Y)
+                {
+                    timer.Stop();
+                    MessageBox.Show("Поражение!");
+                    Field.Children.Clear();
+                    return;
+                }
+            }
+            #region Выход за поле
+
+            if (moveDirection == MoveDirection.Left && head.X < 0) head.X = Field.Width - Field.Width % head.Figure.Width;
+            if (moveDirection == MoveDirection.Right && head.X >= Field.Width - Field.Width % head.Figure.Width) head.X = 0;
+            if (moveDirection == MoveDirection.Down && head.Y >= Field.Height - Field.Height % head.Figure.Height) head.Y = 0;
+            if (moveDirection == MoveDirection.Up && head.Y < 0) head.Y = Field.Height - Field.Height % head.Figure.Height;
+            #endregion
+            //победа по количеству набранной еды
+            if (Python.Count >= 15)
+            {
                 timer.Stop();
+                MessageBox.Show("Победа!");
                 Field.Children.Clear();
                 return;
             }
-            //if (moveDirection == MoveDirection.Right && Python[0].X >= Field.Width - Field.Width % head.Figure.Width) Python[0].X = 20;
-            //if (moveDirection == MoveDirection.Up && Python[0].Y < 0) Python[0].Y = Field.Height - Field.Height % head.Figure.Height;
-            //if (moveDirection == MoveDirection.Down && Python[0].Y >= Field.Height - Field.Height%head.Figure.Height) Python[0].Y = 20;
-            #endregion
             ShowPython();
         }
 
