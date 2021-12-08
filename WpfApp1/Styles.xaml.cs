@@ -27,9 +27,9 @@ namespace WpfApp1
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             uniGrid.Children.Add(
-                new Label 
-                { 
-                    Content = "Label 9" 
+                new Label
+                {
+                    Content = "Label 9"
                 }
             );
         }
@@ -40,8 +40,19 @@ namespace WpfApp1
                 new Label
                 {
                     Content = "Label Big",
-                    Style = FindResource("Mixed_Style") as Style
+                    Style = FindResource("BigCentered") as Style
                 }
+            );
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            uniGrid.Children.Add(
+                new Label
+                 {
+                   Content = "Mixed",
+                    Style = FindResource("New") as Style
+                 }
             );
         }
     }

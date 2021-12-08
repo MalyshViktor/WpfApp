@@ -167,12 +167,60 @@
                 Value="Center" />
         </Style>
         <Style  TargetType ="Label" x:Key="Mixed_Style" BasedOn="{StaticResource BigCentered}">
-
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush
+                        StartPoint="0 0"
+                        EndPoint="1 1">
+                        <GradientStop 
+                            Offset="0.2"
+                            Color="BlanchedAlmond" />
+                        <GradientStop 
+                            Offset="0.5"
+                            Color="SandyBrown" />
+                        <GradientStop 
+                            Offset="1"
+                            Color="Khaki" />
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Foreground">
+                <Setter.Value>
+                    <LinearGradientBrush
+                        StartPoint="0 0"
+                        EndPoint="1 1">
+                        <GradientStop 
+                            Offset="0.2"
+                            Color="LimeGreen" />
+                        <GradientStop 
+                            Offset="0.5"
+                            Color="Aquamarine" />
+                        <GradientStop 
+                            Offset="1"
+                            Color="Aqua" />
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
         </Style>
-        <Style TargetType="Button" x:Key ="New" BasedOn="{StaticResource Mixed_Style}">
-            <Setter 
-                Property="Control.FontSize"
-                Value="60"/>
+        <Style x:Key ="New" TargetType="Label" BasedOn="{StaticResource Mixed_Style}">
+
+            <Setter Property="Foreground">
+                <Setter.Value>
+                <LinearGradientBrush
+                        StartPoint="0 0"
+                        EndPoint="1 1">
+                    <GradientStop 
+                            Offset="0.2"
+                            Color="LimeGreen" />
+                    <GradientStop 
+                            Offset="0.5"
+                            Color="Aquamarine" />
+                    <GradientStop 
+                            Offset="1"
+                            Color="Aqua" />
+                </LinearGradientBrush>
+             </Setter.Value>
+            </Setter>
         </Style>
     </Window.Resources>
     
@@ -189,14 +237,14 @@
 
         <Button Click="Button_Click">Button 1</Button>
         <Button Click="Button2_Click">Button 2</Button>
-        <Button>Button 3</Button>
+        <Button Click ="Button_Click_1">Button 3</Button>
         <Button>Button 4</Button>
 
         <!-- Применение индивидуального
         стиля полностью отменяет глобальный -->
         <Label Style="{StaticResource ResourceKey=CenteredContent}">Label 5</Label>
         <Label Style="{StaticResource ResourceKey=BigCentered}">Label 6</Label>
-        <Label>Label 7</Label>
+        <Label Style="{StaticResource ResourceKey=Mixed_Style}">Label 7</Label>
         <Label>Label 8</Label>
 
         <CheckBox x:Name="check1">Отметить</CheckBox>
