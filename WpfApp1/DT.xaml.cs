@@ -26,15 +26,18 @@ namespace WpfApp1
 
         private void DoneButton_Click(object sender, RoutedEventArgs e)
         {
-
+            DTtext.Text = DTpicker.SelectedDate.Value.ToString();
         }
     }
 }
 
 /* Дата / время
  * Есть множество форматов представления даты/ время
- * SQL
- * - Email/Web
- * 
-  
+ *  - SQL
+ *  - Email/Web
+ *  - Internet
+    + локализация (национальные стандарты)
+    Натболее общее представление даты/времени в программировании - 
+    TIMESTAMP - количество секунд или миллисекунд, прошедших с
+    определенного момента (старт первой Unix - машины)
  */
