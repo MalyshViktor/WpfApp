@@ -134,14 +134,18 @@ namespace WpfApp1
                     };
                     //убираем с поля
                     Field.Children.Remove(food.Figure);
+                    //увеличиваем скорость при сьедании
+                    timer.Interval -= TimeSpan.FromMilliseconds(5.8);
                 }
                 else
                 {//еда в середине - сдвигаем ее на 1 позицию
                     Python.Remove(food);
                     Python.Insert(foodIndex + 1, food);
+
                 }
 
             }
+           
 
             for (int i = Python.Count - 1; i >= 1; i--)
             {
@@ -225,7 +229,7 @@ namespace WpfApp1
             if (moveDirection == MoveDirection.Up && head.Y < 0) head.Y = Field.Height - Field.Height % head.Figure.Height;
             #endregion
             //победа по количеству набранной еды
-            if (Python.Count >= 15)
+            if (Python.Count >= 30)
             {
                 timer.Stop();
                 MessageBox.Show("Победа!");
