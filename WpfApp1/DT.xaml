@@ -21,9 +21,33 @@
             x:Name="DTcalendar"/>
         <TextBlock Grid.Column="1"
                    x:Name="DTtext"/>
-        <Button Grid.Column="1" Grid.Row="1"
+        <Grid Grid.Column="1" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Button Grid.Column="0" Grid.Row="0"
             x:Name="DoneButton"
             Content="Done"
                 Click="DoneButton_Click"/>
+            <Button Grid.Column="0" Grid.Row="1"
+            x:Name="NewButton"
+            Content="ISO-8601"
+                Click="NewButton_Click"/>
+            <Button Grid.Column="0" Grid.Row="2"
+            x:Name="NewButton1"
+            Content="RFC-2822"
+                Click="NewButton1_Click"/>
+            <Button Grid.Column="0" Grid.Row="3"
+            x:Name="NewButton2"
+            Content="RFC-3339"
+                Click="NewButton2_Click"/>
+        </Grid>
+
     </Grid>
 </Window>

@@ -36,17 +36,54 @@ namespace WpfApp1
                  + "\nToShortTimeString " + dateTime.ToShortTimeString()
                  + "\nToUniversalTime " + dateTime.ToUniversalTime()
                  ;
+        }
+
+        private void NewButton_Click(object sender, RoutedEventArgs e)
+        {
+            DateTime dateTime = DTpicker.SelectedDate.Value;
             String iso8601 = String.Format(
-                "{0}-{1}-{2} {3}:{4}:{5}.{6}",
+                 "{0}-{1}-{2} {3}:{4}:{5}",
+                  dateTime.Year,
+                 (dateTime.Month < 10 ? "0" : "") + dateTime.Month,
+                 (dateTime.Day < 10 ? "0" : "") + dateTime.Day,
+                 (dateTime.Hour < 10 ? "0" : "") + dateTime.Hour,
+                 (dateTime.Minute < 10 ? "0" : "") + dateTime.Minute,
+                 (dateTime.Second < 10 ? "0" : "") + dateTime.Second
+                 );
+            DTtext.Text += "\nISO-8601 " + iso8601;
+        }
+
+        private void NewButton1_Click(object sender, RoutedEventArgs e)
+        {
+            DateTime dateTime = DTpicker.SelectedDate.Value;
+            String rfc2822 = String.Format(
+                "{0}, {1} {2} {3} {4}:{5}:{6} +{7}",
+                dateTime.DayOfWeek,
+                (dateTime.Day < 10 ? "0" : "") + dateTime.Day,
+                dateTime.Month,
                 dateTime.Year,
-                (dateTime.Month < 10 ? "0" : "") + dateTime.Month,
+                (dateTime.Hour < 10 ? "0" : "") + dateTime.Hour,
+                ( dateTime.Minute < 10 ? "0" : "") + dateTime.Minute,
+                (dateTime.Second < 10 ? "0" : "") + dateTime.Second,
+                dateTime.ToFileTimeUtc()
+                );
+            DTtext.Text += "\nRFC-2822 " + rfc2822;
+        }
+
+        private void NewButton2_Click(object sender, RoutedEventArgs e)
+        {
+            DateTime dateTime = DTpicker.SelectedDate.Value;
+            String rfc3339 = String.Format(
+                "{0}-{1}-{2}T{3}:{4}:{5} +{6}",
+                dateTime.Year,
+                dateTime.Month,
                 (dateTime.Day < 10 ? "0" : "") + dateTime.Day,
                 (dateTime.Hour < 10 ? "0" : "") + dateTime.Hour,
                 (dateTime.Minute < 10 ? "0" : "") + dateTime.Minute,
                 (dateTime.Second < 10 ? "0" : "") + dateTime.Second,
-                dateTime.Millisecond
+                dateTime.ToFileTimeUtc()
                 );
-            DTtext.Text += "\nISO-8601 " + iso8601;
+            DTtext.Text += "\nRFC-3339 " + rfc3339;
         }
     }
 }
