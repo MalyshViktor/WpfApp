@@ -65,7 +65,7 @@ namespace WpfApp1
                 (dateTime.Hour < 10 ? "0" : "") + dateTime.Hour,
                 ( dateTime.Minute < 10 ? "0" : "") + dateTime.Minute,
                 (dateTime.Second < 10 ? "0" : "") + dateTime.Second,
-                dateTime.ToFileTimeUtc()
+                dateTime.ToFileTime()
                 );
             DTtext.Text += "\nRFC-2822 " + rfc2822;
         }
