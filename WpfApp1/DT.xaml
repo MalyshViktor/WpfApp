@@ -14,6 +14,7 @@
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
         <DatePicker
             x:Name="DTpicker"/>
@@ -47,7 +48,14 @@
             x:Name="NewButton2"
             Content="RFC-3339"
                 Click="NewButton2_Click"/>
+           
         </Grid>
-
+        <TextBox Grid.Column="0" Grid.Row="2"
+                 x:Name="tbDate"
+                 Text="Fri 2021 Dec 10 18:10:23 "/>
+        <Button Grid.Column="1" Grid.Row="2"
+                x:Name="dateParse"
+                Content="Parse"
+                Click="parseDate_Click"/>
     </Grid>
 </Window>

@@ -26,19 +26,32 @@ namespace WpfApp1
 
         private void DoneButton_Click(object sender, RoutedEventArgs e)
         {
-            DateTime dateTime = DTpicker.SelectedDate.Value;
-            DTtext.Text = "ToString " + dateTime.ToString()
-                + "\nToBinary: " + dateTime.ToBinary()
-                 + "\nToLocalTime: " + dateTime.ToLocalTime()
-                 + "\nToLongDateString " + dateTime.ToLongDateString()
-                 + "\nToLongTimeString " + dateTime.ToLongTimeString()
-                 + "\nToShortDateString " + dateTime.ToShortDateString()
-                 + "\nToShortTimeString " + dateTime.ToShortTimeString()
-                 + "\nToUniversalTime " + dateTime.ToUniversalTime()
-                 ;
+            //    DateTime dateTime = DTpicker.SelectedDate.Value;
+            //    DTtext.Text = "ToString " + dateTime.ToString()
+            //        + "\nToBinary: " + dateTime.ToBinary()
+            //         + "\nToLocalTime: " + dateTime.ToLocalTime()
+            //         + "\nToLongDateString " + dateTime.ToLongDateString()
+            //         + "\nToLongTimeString " + dateTime.ToLongTimeString()
+            //         + "\nToShortDateString " + dateTime.ToShortDateString()
+            //         + "\nToShortTimeString " + dateTime.ToShortTimeString()
+            //         + "\nToUniversalTime " + dateTime.ToUniversalTime()
+            //
+            // ;
+            try
+            {
+                DTtext.Text = "ToString " + DTcalendar.SelectedDate.Value.ToString()
+                    + "\nNow: " + DateTime.Now.ToString("dd mm yyyy hh mm ss zzz");
+               
+            }
+            catch
+            {
+                DTtext.Text = "Select Date";
+            }
+
+
         }
 
-        private void NewButton_Click(object sender, RoutedEventArgs e)
+            private void NewButton_Click(object sender, RoutedEventArgs e)
         {
             DateTime dateTime = DTpicker.SelectedDate.Value;
             String iso8601 = String.Format(
@@ -84,8 +97,34 @@ namespace WpfApp1
                 dateTime.ToFileTimeUtc()
                 );
             DTtext.Text += "\nRFC-3339 " + rfc3339;
+
+        }
+
+        private void parseDate_Click(object sender, RoutedEventArgs e)
+        {
+            String DTstr = tbDate.Text;
+            try
+            {
+                var dt = DateTime.Parse(DTstr);
+                DTtext.Text = dt.ToString();
+            }
+            catch 
+            {
+                DTtext.Text = "--";
+            }
+            try
+            {
+                DTtext.Text += "\n" + Convert.ToDateTime(DTstr).ToString();
+            }
+            catch
+            {
+                DTtext.Text = "\n--";
+            }
+
+
         }
     }
+    
 }
 
 /* Дата / время
