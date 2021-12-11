@@ -26,19 +26,32 @@ namespace WpfApp1
 
         private void DoneButton_Click(object sender, RoutedEventArgs e)
         {
-            DateTime dateTime = DTpicker.SelectedDate.Value;
-            DTtext.Text = "ToString " + dateTime.ToString()
-                + "\nToBinary: " + dateTime.ToBinary()
-                 + "\nToLocalTime: " + dateTime.ToLocalTime()
-                 + "\nToLongDateString " + dateTime.ToLongDateString()
-                 + "\nToLongTimeString " + dateTime.ToLongTimeString()
-                 + "\nToShortDateString " + dateTime.ToShortDateString()
-                 + "\nToShortTimeString " + dateTime.ToShortTimeString()
-                 + "\nToUniversalTime " + dateTime.ToUniversalTime()
-                 ;
+            //    DateTime dateTime = DTpicker.SelectedDate.Value;
+            //    DTtext.Text = "ToString " + dateTime.ToString()
+            //        + "\nToBinary: " + dateTime.ToBinary()
+            //         + "\nToLocalTime: " + dateTime.ToLocalTime()
+            //         + "\nToLongDateString " + dateTime.ToLongDateString()
+            //         + "\nToLongTimeString " + dateTime.ToLongTimeString()
+            //         + "\nToShortDateString " + dateTime.ToShortDateString()
+            //         + "\nToShortTimeString " + dateTime.ToShortTimeString()
+            //         + "\nToUniversalTime " + dateTime.ToUniversalTime()
+            //
+            // ;
+            try
+            {
+                DTtext.Text = "ToString " + DTcalendar.SelectedDate.Value.ToString()
+                    + "\nNow: " + DateTime.Now.ToString("dd mm yyyy hh mm ss zzz");
+               
+            }
+            catch
+            {
+                DTtext.Text = "Select Date";
+            }
+
+
         }
 
-        private void NewButton_Click(object sender, RoutedEventArgs e)
+            private void NewButton_Click(object sender, RoutedEventArgs e)
         {
             DateTime dateTime = DTpicker.SelectedDate.Value;
             String iso8601 = String.Format(
@@ -56,36 +69,53 @@ namespace WpfApp1
         private void NewButton1_Click(object sender, RoutedEventArgs e)
         {
             DateTime dateTime = DTpicker.SelectedDate.Value;
-            String rfc2822 = String.Format(
-                "{0}, {1} {2} {3} {4}:{5}:{6} +{7}",
-                dateTime.DayOfWeek,
-                (dateTime.Day < 10 ? "0" : "") + dateTime.Day,
-                dateTime.Month,
-                dateTime.Year,
-                (dateTime.Hour < 10 ? "0" : "") + dateTime.Hour,
-                ( dateTime.Minute < 10 ? "0" : "") + dateTime.Minute,
-                (dateTime.Second < 10 ? "0" : "") + dateTime.Second,
-                dateTime.ToFileTime()
-                );
+            String rfc2822 = dateTime.ToString("R");
             DTtext.Text += "\nRFC-2822 " + rfc2822;
         }
 
         private void NewButton2_Click(object sender, RoutedEventArgs e)
         {
             DateTime dateTime = DTpicker.SelectedDate.Value;
-            String rfc3339 = String.Format(
-                "{0}-{1}-{2}T{3}:{4}:{5} +{6}",
-                dateTime.Year,
-                dateTime.Month,
-                (dateTime.Day < 10 ? "0" : "") + dateTime.Day,
-                (dateTime.Hour < 10 ? "0" : "") + dateTime.Hour,
-                (dateTime.Minute < 10 ? "0" : "") + dateTime.Minute,
-                (dateTime.Second < 10 ? "0" : "") + dateTime.Second,
-                dateTime.ToFileTimeUtc()
-                );
+            String rfc3339 = //dateTime.ToString("o");
+            String.Format(
+            "{0}-{1}-{2}T{3}:{4}:{5} +{6}",
+            dateTime.Year,
+            dateTime.Month,
+            (dateTime.Day < 10 ? "0" : "") + dateTime.Day,
+            (dateTime.Hour < 10 ? "0" : "") + dateTime.Hour,
+            (dateTime.Minute < 10 ? "0" : "") + dateTime.Minute,
+            (dateTime.Second < 10 ? "0" : "") + dateTime.Second,
+            dateTime.ToString("ffffK")
+            );
             DTtext.Text += "\nRFC-3339 " + rfc3339;
+
+        }
+
+        private void parseDate_Click(object sender, RoutedEventArgs e)
+        {
+            String DTstr = tbDate.Text;
+            try
+            {
+                var dt = DateTime.Parse(DTstr);
+                DTtext.Text = dt.ToString();
+            }
+            catch 
+            {
+                DTtext.Text = "--";
+            }
+            try
+            {
+                DTtext.Text += "\n" + Convert.ToDateTime(DTstr).ToString();
+            }
+            catch
+            {
+                DTtext.Text = "\n--";
+            }
+
+
         }
     }
+    
 }
 
 /* Дата / время
@@ -94,7 +124,7 @@ namespace WpfApp1
  *  - Email/Web
  *  - Internet
     + локализация (национальные стандарты)
-    Натболее общее представление даты/времени в программировании - 
+    Наиболее общее представление даты/времени в программировании - 
     TIMESTAMP - количество секунд или миллисекунд, прошедших с
     определенного момента (старт первой Unix - машины)
  */
