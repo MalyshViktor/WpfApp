@@ -39,6 +39,8 @@ namespace WpfApp1
                         HorizontalContentAlignment = HorizontalAlignment.Center
                     };
                     mineLabel.MouseDown += MineLabel_MouseDown;
+                    this.RegisterName("label_" + x + "_" + y,
+                        mineLabel);
                     Field.Children.Add(mineLabel);
 
                 }
@@ -101,15 +103,14 @@ namespace WpfApp1
                 //Массив предполагаемых имен:
                 String[] names =
                 {
+                "label_" + (x-1) + "_" + (y-1),
                 "label_" + (x-1) + "_" + (y),
                 "label_" + (x-1) + "_" + (y+1),
                 "label_" + (x) + "_" + (y+1),
+                "label_" + (x) + "_" + (y-1),
                 "label_" + (x+1) + "_" + (y+1),
                 "label_" + (x+1) + "_" + (y),
                 "label_" + (x+1) + "_" + (y-1),
-                "label_" + (x) + "_" + (y-1),
-                "label_" + (x-1) + "_" + (y-1),
-
                 };
                 int mines = 0;
 
